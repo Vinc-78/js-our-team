@@ -50,9 +50,17 @@ console.log(arrayTeam[0]["role"]);
 
 const teamContainer = document.querySelector(".team-container");
 
+const nameDom = document.getElementById("name");
+const roleDom = document.getElementById("role");
+const imageDom = document.getElementById("image");
+
+
+
+
+const btn = document.getElementById("addMemberButton");
+
 // realizzo la funzione che per ogni elemento dell'array crea la team card e l'aggiunge al DOM
 // funzione evocata da subito
-
 
 
 stampaTutteCard();
@@ -61,7 +69,7 @@ function stampaTutteCard() {
 
     console.log("funziona");
 
-    for (let i=0; i<arrayTeam.length; i++) {
+    for (let i = 0; i < arrayTeam.length; i++) {
 
         const elementArray = arrayTeam[i];
 
@@ -71,25 +79,59 @@ function stampaTutteCard() {
 
         const imgCard = document.createElement("div");
         imgCard.classList.add("card-image");
-        imgCard.innerHTML=`<img src="${elementArray.image}" alt="${elementArray.name}" /> `
+        imgCard.innerHTML = `<img src="${elementArray.image}" alt="${elementArray.name}" /> `
         teamCard.append(imgCard);
 
         const textCard = document.createElement("div");
         textCard.classList.add("card-text");
-        teamContainer.append(teamCard);
+        teamCard.append(textCard);
 
-        const h3 =document.createElement("h3");
-        h3.innerHTML=`${elementArray.name}`
-        h3.append(textCard)
+        const h3 = document.createElement("h3");
+        h3.innerHTML = `${elementArray.name}`
+        textCard.append(h3)
 
-        const p =document.createElement("p");
-        p.innerHTML=`${elementArray.role}`
-        p.append(textCard);
-        
+        const p = document.createElement("p");
+        p.innerHTML = `${elementArray.role}`
+        textCard.append(p);
+
     }
 
 }
 
 
+//realizzo una funzione che legge i valori del form e li carica nell'array 
 
-   
+// richiama la stampa di tutte le Card
+
+
+function leggoForm() {
+
+    const nameN = nameDom.value;
+    const roleN = roleDom.value;
+    const imageN = imageDom.value;
+
+
+    const newMember = {
+
+        name: nameN,
+        role: roleN,
+        image: imageN
+
+    }
+
+    console.log(newMember);
+
+    arrayTeam.push(newMember);
+
+    stampaTutteCard(newMember);
+}
+
+btn.addEventListener("click", function () {
+
+    leggoForm()
+
+    console.log("stampa tutto l'array ")
+    console.log(arrayTeam);
+})
+
+
