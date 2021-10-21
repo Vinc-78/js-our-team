@@ -73,13 +73,24 @@ function stampaTutteCard() {
 
         const elementArray = arrayTeam[i];
 
+       aggiungiCard(elementArray.name, elementArray.role, elementArray.image)
+
+    }
+
+}
+
+// creo una funzione esterna da utilizzare anche per l'elemento singolo
+//a cui devo passare i tre valori dell'arrey
+
+function aggiungiCard(nomeCard, ruoloCard, immagineCard) {
+
         const teamCard = document.createElement("div");
         teamCard.classList.add("team-card");
         teamContainer.append(teamCard);
 
         const imgCard = document.createElement("div");
         imgCard.classList.add("card-image");
-        imgCard.innerHTML = `<img src="${elementArray.image}" alt="${elementArray.name}" /> `
+        imgCard.innerHTML = `<img src="${immagineCard}" alt="${nomeCard}" /> `
         teamCard.append(imgCard);
 
         const textCard = document.createElement("div");
@@ -87,16 +98,18 @@ function stampaTutteCard() {
         teamCard.append(textCard);
 
         const h3 = document.createElement("h3");
-        h3.innerHTML = `${elementArray.name}`
+        h3.innerHTML = `${nomeCard}`
         textCard.append(h3)
 
         const p = document.createElement("p");
-        p.innerHTML = `${elementArray.role}`
+        p.innerHTML = `${ruoloCard}`
         textCard.append(p);
 
-    }
 
 }
+
+
+
 
 
 //realizzo una funzione che legge i valori del form e li carica nell'array 
@@ -115,7 +128,7 @@ function leggoForm() {
 
         name: nameN,
         role: roleN,
-        image: imageN
+        image: `img/${imageN}`
 
     }
 
@@ -123,7 +136,7 @@ function leggoForm() {
 
     arrayTeam.push(newMember);
 
-    stampaTutteCard(newMember);
+    aggiungiCard(newMember.name, newMember.role, newMember.image);
 }
 
 btn.addEventListener("click", function () {
